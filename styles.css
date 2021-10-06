@@ -1,0 +1,34 @@
+html{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(160, 229, 160);
+}
+button{
+    width:100px;
+    text-align: center;
+    color:blue;
+    padding:3px;
+    font-size: 15px;
+    margin-left: 5cm;
+}
+
+
+input{
+    width:150px;
+    font-size: 15px;
+    align-self:right;
+    margin: 8px auto;
+    background-color: rgb(207, 204, 204);
+}
+
+a{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color:slateblue;
+}
+
+div{
+    margin-left: 5cm;
+    width:1000px;
+}
+
+p{font-weight: bold}
