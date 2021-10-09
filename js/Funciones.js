@@ -152,6 +152,11 @@ function OcultarForm(){
 }
 
 function guardarCabin(){
+    validarvacio($("#brand").val(), "Debe ingresar un brand");
+    validarvacio($("#rooms").val(), "Debe ingresar un N° de cuartos");
+    validarvacio($("#category_id").val(), "Debe ingresar un id de categoria");
+    validarvacio($("#name").val(), "Debe ingresar un nombre para la cabaña");
+
     let myData={
         brand:$("#brand").val(),
         rooms:$("#rooms").val(),
@@ -178,6 +183,11 @@ function guardarCabin(){
 }
 
 function editarCabin(){
+    validarvacio($("#brand").val(), "Debe ingresar un brand");
+    validarvacio($("#rooms").val(), "Debe ingresar un N° de cuartos");
+    validarvacio($("#category_id").val(), "Debe ingresar un id de categoria");
+    validarvacio($("#name").val(), "Debe ingresar un nombre para la cabaña");
+
     let myData={
         id:$("#id").val(),
         brand:$("#brand").val(),
@@ -225,6 +235,13 @@ function borrarCabin(idElemento){
             alert("Se ha Eliminado.")
         }
     });
+}
+
+function validarvacio(campo, msj_vacio){
+    if(campo==""){
+        alert(msj_vacio);
+        throw 'exit';
+    }    
 }
 
 //2.FUNCIONES PARA LA TABLA CLIENTE
@@ -335,8 +352,9 @@ function AgregarClient(){
     $("#detalleClient").empty();
     mostrarlabelsC();
     document.getElementById("idC").removeAttribute("hidden");$("#idC").val("");
+    document.getElementById("idC").removeAttribute("disabled");
     document.getElementById("nameC").removeAttribute("hidden");$("#nameC").val("");
-    document.getElementById("email").removeAttribute("hidden");$("email").val("");
+    document.getElementById("email").removeAttribute("hidden");$("#email").val("");
     document.getElementById("age").removeAttribute("hidden");$("#age").val("");
     document.getElementById("BGCl").removeAttribute("hidden");
     document.getElementById("BECl").setAttribute("hidden", "true");
@@ -348,7 +366,7 @@ function ModifClient(){
     mostrarlabelsC();
     document.getElementById("idC").removeAttribute("hidden");
     $("#idC").val(Client1.items[0].id);
-    document.getElementById("idC").setAttribute("disabled", "disabled");
+    document.getElementById("idC").setAttribute("disabled", "true");
     document.getElementById("nameC").removeAttribute("hidden");
     $("#nameC").val(Client1.items[0].name);
     document.getElementById("email").removeAttribute("hidden");
@@ -371,10 +389,11 @@ function OcultarFormClient(){
     document.getElementById("BECl").setAttribute("hidden", "true");
 }
 
-
-
-
 function guardarClient(){
+    validarvacio($("#nameC").val(), "Debe ingresar un nombre");
+    validarvacio($("#email").val(), "Debe ingresar un e-mail");
+    validarvacio($("#age").val(), "Debe ingresar la edad del cliente");
+
     let myData={
         id:$("#idC").val(),
         name:$("#nameC").val(),
@@ -402,6 +421,10 @@ function guardarClient(){
 }
 
 function editarClient(){
+    validarvacio($("#nameC").val(), "Debe ingresar un nombre");
+    validarvacio($("#email").val(), "Debe ingresar un e-mail");
+    validarvacio($("#age").val(), "Debe ingresar la edad del cliente");
+
     let myData={
         id:$("#idC").val(),
         name:$("#nameC").val(),
@@ -461,13 +484,16 @@ function ConsultarMsg(){
             $("#resultMsg").empty();
             console.log(respuesta);
             mostrarMsg(respuesta.items);
-            x=respuesta.items.length;
+            var n=[];
+            for(i=0;i<respuesta.items.length;i++){
+                n.push(respuesta.items[i].id);
+            }; 
+            x = Math.max.apply(null, n); console.log(x);
             globalThis; //se usa para q x sea una variable global
             document.getElementById("msg").setAttribute("hidden", "true");
             document.getElementById("BGM").setAttribute("hidden", "true");
         } 
     });
-    
 }
 
 function mostrarMsg(items){
@@ -491,15 +517,14 @@ function mostrarMsg(items){
     }
     myTable+="</table>";
     $("#resultMsg").append(myTable); //"resultMsg" hace referencia al id del <div> creado en el html
-    
 }
 
 
 function guardarMsg(){
-    ConsultarMsg();
-    console.log(x);
+    validarvacio($("#msg").val(), "No ha ingresado ningún mensaje");
+    ConsultarMsg(); console.log(x);
     let myData={
-        id:x+1, //x es el num de items actuales de la tabla
+        id:x+1, //x es el id max de la tabla
         messagetext:$("#msg").val(),
     };
     console.log($("#msg").val());
