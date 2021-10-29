@@ -488,7 +488,11 @@ function ConsultarMsg(){
             for(i=0;i<respuesta.items.length;i++){
                 n.push(respuesta.items[i].id);
             }; 
-            x = Math.max.apply(null, n); console.log(x);
+            if(respuesta.items.length==0){
+                x=0;
+            }else{
+                x = Math.max.apply(null, n); console.log(x);
+            }    
             globalThis; //se usa para q x sea una variable global
             document.getElementById("msg").setAttribute("hidden", "true");
             document.getElementById("BGM").setAttribute("hidden", "true");
